@@ -10,7 +10,9 @@ import NikeNotificationsLib
 
 do {
     let urls = try PageScraper.fetch()
-    print(urls)
+    let mailClient = EmailClient()
+    
+    mailClient.sendMail("ryankrol.m@gmail.com", images: urls)
 } catch {
     print(error)
 }
