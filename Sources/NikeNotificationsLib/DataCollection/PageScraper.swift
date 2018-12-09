@@ -12,6 +12,7 @@ import SwiftSoup
 public class PageScraper {
 
     private static let nikeLaunchesPage = URL(string: "https://www.nike.com/gb/launch")!
+    private static let sneakerNewsJordansPage = URL(string: "https://sneakernews.com/air-jordan-release-dates/")!
 
     private init() {}
 
@@ -23,6 +24,10 @@ public class PageScraper {
      */
     public static func fetchNikeLinks() throws -> Set<String> {
         return try fetch(processor: nikeLinkProcessing, url: nikeLaunchesPage)
+    }
+
+    public static func fetchJordanSneakerNewsLinks() throws -> Set<String> {
+        return try fetch(processor: jordanSneakerNewsLinkProcessing, url: sneakerNewsJordansPage)
     }
 
     /**
@@ -116,5 +121,39 @@ public class PageScraper {
         }).compactMap({$0})
 
         return Set<String>(linksArray)
+    }
+
+    /**
+     Processor for links on the Jordan SneakerNews Launches page
+
+     - Parameter page: The page we want to parse
+     - throws: When we can't parse the page
+     - returns: A set of links for images on the page
+     */
+    private static func jordanSneakerNewsLinkProcessing(page: Document) throws -> Set<String> {
+
+        let links = try page.getElementsByClass("image-box")
+
+        let imageSources = links.map { (link) -> String? in
+
+            // get the image from the <a> tag
+            guard let innerImage = try? link.child(0).html() else {
+                return nil
+            }
+
+            // recreate an image tag from the inner html
+            guard let imageDom = try? SwiftSoup.parseBodyFragment(innerImage) else {
+                return nil
+            }
+
+            // grab that image tab, and the associated source
+            guard let imageSource = try? imageDom.getElementsByTag("img").first()?.attr("src") else {
+                return nil
+            }
+
+            return imageSource
+        }.compactMap({$0})
+
+        return Set<String>(imageSources)
     }
 }

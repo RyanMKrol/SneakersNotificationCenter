@@ -13,8 +13,12 @@ func run() {
     let mailClient = EmailClient()
 
     do {
+
         let existingUrls = try FileInteractions.fetch()
-        let urls = try PageScraper.fetchNikeLinks()
+        let nikeUrls = try PageScraper.fetchNikeLinks()
+        let sneakerNewsUrls = try PageScraper.fetchJordanSneakerNewsLinks()
+
+        let urls = nikeUrls.union(sneakerNewsUrls)
 
         // if there are no new shoes, just return
         guard !urls.isSubset(of: existingUrls) else {
