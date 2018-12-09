@@ -62,6 +62,8 @@ public class PageScraper {
     /**
      Scrapes the page and grabs the images we want to use
 
+     - Parameter parseLinks: The processor we want to use to parse data from the page
+     - Parameter url: The URL of the page we want data from
      - Parameter completion: The callback to call once the data has been handled (or not)
      */
     private static func call(
