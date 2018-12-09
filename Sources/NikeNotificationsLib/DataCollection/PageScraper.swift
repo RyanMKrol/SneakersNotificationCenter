@@ -21,9 +21,9 @@ public class PageScraper {
      - returns: The URLs of sneakers on the page
      - throws: Any exceptions related to scraping the page, or parsing the response
      */
-    public static func fetch() throws -> [String] {
+    public static func fetch() throws -> Set<String> {
 
-        var apiResult: [String]? = nil
+        var apiResult: Set<String>? = nil
         var error: Error? = nil
 
         PageScraper.call() { (result: Result) in
@@ -52,7 +52,7 @@ public class PageScraper {
      - Parameter completion: The callback to call once the data has been handled (or not)
      */
     private static func call(
-        completion: @escaping (Result<[String]>) -> Void
+        completion: @escaping (Result<Set<String>>) -> Void
     ) {
         let waitTask = DispatchSemaphore(value: 0)
 
@@ -70,7 +70,7 @@ public class PageScraper {
 
                 let links = try! parsedHtml.getElementsByTag("link")
 
-                return links.map({ (link) -> String? in
+                let linksArray = links.map({ (link) -> String? in
                     guard (try? link.attr("rel")) == "preload" else {
                         return nil
                     }
@@ -81,6 +81,8 @@ public class PageScraper {
 
                     return linkHref
                 }).compactMap({$0})
+
+                return Set<String>(linksArray)
             })
         }.resume()
 

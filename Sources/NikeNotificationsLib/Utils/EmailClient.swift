@@ -4,6 +4,7 @@
 //
 //  Created by Ryan Krol on 08/12/2018.
 //
+//  Song: King Kunta - Kendrick Lamar
 
 import Foundation
 import SwiftSMTP
@@ -25,7 +26,7 @@ public class EmailClient {
         )
     }
 
-    public func sendMail(_ to: String, images: [String]) {
+    public func sendMail(_ to: String, images: Set<String>) {
 
         let waitTask = DispatchSemaphore(value: 0)
         let toUser = Mail.User(email: to)
