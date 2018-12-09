@@ -14,7 +14,7 @@ func run() {
 
     do {
         let existingUrls = try FileInteractions.fetch()
-        let urls = try PageScraper.fetch()
+        let urls = try PageScraper.fetchNikeLinks()
 
         // if there are no new shoes, just return
         guard !urls.isSubset(of: existingUrls) else {
