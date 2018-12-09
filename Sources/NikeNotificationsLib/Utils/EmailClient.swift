@@ -53,5 +53,27 @@ public class EmailClient {
 
         waitTask.wait()
     }
+
+    public func sendFailureUpdate(_ to: String, error: Error) {
+
+        let waitTask = DispatchSemaphore(value: 0)
+        let toUser = Mail.User(email: to)
+
+        let mail = Mail(
+            from: self.fromEmail,
+            to: [toUser],
+            subject: "Upcoming Releases From Nike - Error",
+            text: "The program failed to run with the following error - \(error)"
+        )
+
+        self.client.send(mail) { (error) in
+            if let error = error {
+                print(error)
+            }
+            waitTask.signal()
+        }
+
+        waitTask.wait()
+    }
 }
 
