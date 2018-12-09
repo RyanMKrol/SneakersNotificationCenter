@@ -14,17 +14,18 @@ func run() {
 
     do {
         let existingUrls = try FileInteractions.fetch()
-        let newUrls = try PageScraper.fetch()
+        let urls = try PageScraper.fetch()
 
         // if there are no new shoes, just return
-        guard !newUrls.isSubset(of: existingUrls) else {
+        guard !urls.isSubset(of: existingUrls) else {
             return
         }
 
-        let updateUrls = existingUrls.union(newUrls)
+        let updateUrls = existingUrls.union(urls)
         let updateString = updateUrls.joined(separator: "\n")
         try FileInteractions.push(urls: updateString)
 
+        let newUrls = urls.subtracting(existingUrls)
         mailClient.sendMail("ryankrol.m@gmail.com", images: newUrls)
     } catch {
         mailClient.sendFailureUpdate("ryankrol.m@gmail.com", error: error)
