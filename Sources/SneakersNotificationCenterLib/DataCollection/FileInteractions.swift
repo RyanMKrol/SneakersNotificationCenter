@@ -1,6 +1,6 @@
 //
 //  FileInteractions.swift
-//  NikeNotificationsLib
+//  SneakersNotificationCenterLib
 //
 //  Created by Ryan Krol on 08/12/2018.
 //
@@ -18,7 +18,7 @@ public class FileInteractions {
 
     private init(){}
 
-    private static let fileLoc = "NikeNotifications/saved.txt"
+    private static let fileLoc = "SneakersNotificationCenter/saved.txt"
     private static let fileManager = FileManager.default
 
     public static func fetch() throws -> Set<String> {

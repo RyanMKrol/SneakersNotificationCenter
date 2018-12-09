@@ -1,6 +1,6 @@
 //
 //  PageScraper.swift
-//  NikeNotificationsLib
+//  SneakersNotificationCenterLib
 //
 //  Created by Ryan Krol on 08/12/2018.
 //

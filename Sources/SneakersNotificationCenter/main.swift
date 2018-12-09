@@ -1,13 +1,13 @@
 //
 //  main.swift
-//  NikeNotification
+//  SneakersNotificationCenterLib
 //
 //  Created by Ryan Krol on 08/12/2018.
 //
 //  Song: Illuminate - Tender
 
 import Foundation
-import NikeNotificationsLib
+import SneakersNotificationCenterLib
 
 func run() {
     let mailClient = EmailClient()

@@ -1,6 +1,6 @@
 //
 //  APIErrors.swift
-//  NikeNotifications
+//  SneakersNotificationCenterLib
 //
 //  Created by Ryan Krol on 08/12/2018.
 //

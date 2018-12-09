@@ -1,6 +1,6 @@
 //
 //  EmailClient.swift
-//  NikeNotificationsLib
+//  SneakersNotificationCenterLib
 //
 //  Created by Ryan Krol on 08/12/2018.
 //
@@ -18,7 +18,7 @@ public class EmailClient {
     private let emailPassword = "example"
 
     public init() {
-        self.fromEmail = Mail.User(name: "NikeNotifications", email: self.emailAccount)
+        self.fromEmail = Mail.User(name: "SneakersNotificationCenter", email: self.emailAccount)
         self.client = SMTP(
             hostname: self.hostName,
             email: self.emailAccount,
@@ -39,7 +39,7 @@ public class EmailClient {
         let mail = Mail(
             from: self.fromEmail,
             to: [toUser],
-            subject: "Upcoming Releases From Nike",
+            subject: "Upcoming Sneaker Releases",
             text: "Here are the new shoes coming out",
             attachments: htmlAttachments
         )
@@ -62,7 +62,7 @@ public class EmailClient {
         let mail = Mail(
             from: self.fromEmail,
             to: [toUser],
-            subject: "Upcoming Releases From Nike - Error",
+            subject: "Upcoming Sneaker Releases - Error",
             text: "The program failed to run with the following error - \(error)"
         )
 
@@ -76,4 +76,3 @@ public class EmailClient {
         waitTask.wait()
     }
 }
-

@@ -1,12 +1,12 @@
 import XCTest
-@testable import NikeNotifications
+@testable import SneakersNotificationCenter
 
-final class NikeNotificationsTests: XCTestCase {
+final class SneakersNotificationCenterTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(NikeNotifications().text, "Hello, World!")
+        XCTAssertEqual(SneakersNotificationCenter().text, "Hello, World!")
     }
 
     static var allTests = [

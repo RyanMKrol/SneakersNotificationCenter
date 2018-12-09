@@ -1,7 +1,7 @@
 import XCTest
 
-import NikeNotificationsTests
+import SneakersNotificationCenterTests
 
 var tests = [XCTestCaseEntry]()
-tests += NikeNotificationsTests.allTests()
+tests += SneakersNotificationCenterTests.allTests()
 XCTMain(tests)
