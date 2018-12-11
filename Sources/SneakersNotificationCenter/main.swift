@@ -30,7 +30,7 @@ func run() {
         try FileInteractions.push(urls: updateString)
 
         let newUrls = urls.subtracting(existingUrls)
-        mailClient.sendMail("ryankrol.m@gmail.com", images: newUrls)
+        mailClient.sendMail(["ryankrol.m@gmail.com"], images: newUrls)
     } catch {
         mailClient.sendFailureUpdate("ryankrol.m@gmail.com", error: error)
     }

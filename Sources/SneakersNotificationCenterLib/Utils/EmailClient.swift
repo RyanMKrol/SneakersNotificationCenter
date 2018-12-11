@@ -26,10 +26,11 @@ public class EmailClient {
         )
     }
 
-    public func sendMail(_ to: String, images: Set<String>) {
+    public func sendMail(_ users: [String], images: Set<String>) {
 
         let waitTask = DispatchSemaphore(value: 0)
-        let toUser = Mail.User(email: to)
+
+        let toUsers = users.map{ Mail.User(email: $0) }
 
         // Create an HTML `Attachment`
         let htmlAttachments = images.map({
@@ -38,7 +39,7 @@ public class EmailClient {
 
         let mail = Mail(
             from: self.fromEmail,
-            to: [toUser],
+            to: toUsers,
             subject: "Upcoming Sneaker Releases",
             text: "Here are the new shoes coming out",
             attachments: htmlAttachments
