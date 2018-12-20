@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftSoup
+import ToolLibrary
 
 public class PageScraper {
 
