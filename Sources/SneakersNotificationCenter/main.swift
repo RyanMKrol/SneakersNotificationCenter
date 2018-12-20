@@ -8,13 +8,14 @@
 
 import Foundation
 import SneakersNotificationCenterLib
+import SwiftToolbox
 
 func run() {
     let mailClient = EmailClient()
 
     do {
-
-        let existingUrls = try FileInteractions.fetch()
+        let savedLinksFile = "SneakersNotificationCenter/saved.txt"
+        let existingUrls = try FileHandler.readLines(fileLoc: savedLinksFile)
         let nikeUrls = try PageScraper.fetchNikeLinks()
         let sneakerNewsUrls = try PageScraper.fetchJordanSneakerNewsLinks()
 
@@ -27,7 +28,7 @@ func run() {
 
         let updateUrls = existingUrls.union(urls)
         let updateString = updateUrls.joined(separator: "\n")
-        try FileInteractions.push(urls: updateString)
+        try FileHandler.pushString(urls: updateString, fileLoc: savedLinksFile)
 
         let newUrls = urls.subtracting(existingUrls)
         mailClient.sendMail(["ryankrol.m@gmail.com"], images: newUrls)

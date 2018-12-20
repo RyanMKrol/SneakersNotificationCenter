@@ -37,8 +37,8 @@ public class PageScraper {
      - returns: The URLs of sneakers on the page
      - throws: Any exceptions related to scraping the page, or parsing the response
      */
-    private static func fetch
-        (processor: @escaping (Document) throws -> Set<String>,
+    private static func fetch(
+        processor: @escaping (Document) throws -> Set<String>,
         url: URL
     ) throws -> Set<String> {
 
