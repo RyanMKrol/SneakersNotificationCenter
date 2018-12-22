@@ -21,6 +21,7 @@ class SneakerNewsJordansDataHandler: PageDataHandler {
      Processor for links on the Jordan SneakerNews Launches page
 
      - Parameter htmlDoc: The page we want to parse
+
      - throws: When we can't parse the page
      - returns: A set of links for images on the page
      */
