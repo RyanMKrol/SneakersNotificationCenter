@@ -1,0 +1,8 @@
+{
+    "config": {
+        "emailAccount": "ryankrol.m@gmail.com",
+        "emailName": "ConcertFinder",
+        "password": "nsqlhslazuygnres",
+        "hostName": "smtp.gmail.com",
+    }
+}

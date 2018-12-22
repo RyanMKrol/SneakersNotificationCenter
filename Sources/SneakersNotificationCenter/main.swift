@@ -11,12 +11,23 @@ import SneakersNotificationCenterLib
 import SwiftToolbox
 
 func run() {
-    let mailClient = EmailClient()
+
+    let emailConfigFile = "/Users/ryankrol/Desktop/ToolboxProjects/SneakersNotificationCenter/Sources/SneakersNotificationCenterLib/emailConfig.json"
+    let savedLinksFile = "SneakersNotificationCenter/saved.txt"
+
+    let emailConfig = try? ConfigHandler<EmailConfig>(configFile: emailConfigFile).load()
+
+    guard let concreteEmailConfig = emailConfig else {
+        print(CommonErrors.CouldNotLoadEmailConfig)
+        return
+    }
+
+    let emailClient = EmailHandler(config: concreteEmailConfig)
 
     do {
-        let savedLinksFile = "SneakersNotificationCenter/saved.txt"
-        let existingUrls = try FileHandler.readLines(fileLoc: savedLinksFile)
-        let nikeUrls = try PageScraper.fetchNikeLinks()
+
+        let existingUrls    = try FileHandler.readLines(fileLoc: savedLinksFile)
+        let nikeUrls        = try PageScraper.fetchNikeLinks()
         let sneakerNewsUrls = try PageScraper.fetchJordanSneakerNewsLinks()
 
         let urls = nikeUrls.union(sneakerNewsUrls)
@@ -26,14 +37,23 @@ func run() {
             return
         }
 
-        let updateUrls = existingUrls.union(urls)
+        let updateUrls   = existingUrls.union(urls)
         let updateString = updateUrls.joined(separator: "\n")
         try FileHandler.pushString(urls: updateString, fileLoc: savedLinksFile)
 
         let newUrls = urls.subtracting(existingUrls)
-        mailClient.sendMail(["ryankrol.m@gmail.com"], images: newUrls)
+
+        emailClient.sendMail(
+            coreUser: "ryankrol.m@gmail.com",
+            subject: "Upcoming Sneaker Releases",
+            imageAttachmentUrls: Array(newUrls)
+        )
     } catch {
-        mailClient.sendFailureUpdate("ryankrol.m@gmail.com", error: error)
+        emailClient.sendMail(
+            coreUser: "ryankrol.m@gmail.com",
+            subject: "Upcoming Sneaker Releases - Error",
+            content: "The program failed to run with the following error - \(error)"
+        )
     }
 
 }
