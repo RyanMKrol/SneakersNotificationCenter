@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "SneakersNotificationCenter",
     dependencies: [
-        .package(url: "https://github.com/RyanMKrol/SwiftToolbox.git", .branch("master")),
+        .package(url: "https://github.com/RyanMKrol/SwiftToolbox.git", .upToNextMajor(from: "1.0.0")),
     ],
     targets: [
         .target(

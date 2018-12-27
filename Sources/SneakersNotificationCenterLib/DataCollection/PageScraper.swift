@@ -21,10 +21,7 @@ public class PageScraper {
      - returns: A set of links for images on the page
      */
     public static func fetchNikeLinks() throws -> Set<String> {
-        var dataHandler = NikeDataHandler()
-        try InteractionHandler.fetch(dataHandler: &dataHandler)
-
-        return try dataHandler.getData()
+        return try InteractionHandler.fetch(dataHandler: NikeDataHandler())
     }
 
     /**
@@ -34,9 +31,6 @@ public class PageScraper {
      - returns: A set of links for images on the page
      */
     public static func fetchJordanSneakerNewsLinks() throws -> Set<String> {
-        var dataHandler = SneakerNewsJordansDataHandler()
-        try InteractionHandler.fetch(dataHandler: &dataHandler)
-
-        return try dataHandler.getData()
+        return try InteractionHandler.fetch(dataHandler: SneakerNewsJordansDataHandler())
     }
 }

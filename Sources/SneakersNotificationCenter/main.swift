@@ -13,7 +13,7 @@ import SwiftToolbox
 func run() {
 
     let emailConfigFile = "/Users/ryankrol/Desktop/ToolboxProjects/SneakersNotificationCenter/Sources/SneakersNotificationCenterLib/emailConfig.json"
-    let savedLinksFile = "SneakersNotificationCenter/saved.txt"
+    let savedLinksFile = "\(#file.components(separatedBy: "Sources/")[0])Data/saved.txt"
 
     let emailConfig = try? ConfigHandler<EmailConfig>(configFile: emailConfigFile).load()
 
@@ -39,7 +39,7 @@ func run() {
 
         let updateUrls   = existingUrls.union(urls)
         let updateString = updateUrls.joined(separator: "\n")
-        try FileHandler.pushString(urls: updateString, fileLoc: savedLinksFile)
+        try FileHandler.pushString(content: updateString, fileLoc: savedLinksFile)
 
         let newUrls = urls.subtracting(existingUrls)
 
