@@ -7,8 +7,8 @@
 //  Song: High Again - Hoodie Allen
 
 import Foundation
-import SwiftToolbox
-import SwiftSoup
+import protocol SwiftToolbox.PageDataHandler
+import class SwiftSoup.Document
 
 class NikeDataHandler: PageDataHandler {
 

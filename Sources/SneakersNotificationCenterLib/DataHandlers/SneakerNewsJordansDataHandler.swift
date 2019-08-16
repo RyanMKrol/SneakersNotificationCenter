@@ -7,8 +7,9 @@
 //  Song: Love in This Club - Usher, Jeezy
 
 import Foundation
-import SwiftToolbox
-import SwiftSoup
+import protocol SwiftToolbox.PageDataHandler
+import class SwiftSoup.Document
+import func SwiftSoup.parseBodyFragment
 
 class SneakerNewsJordansDataHandler: PageDataHandler {
 
@@ -36,7 +37,7 @@ class SneakerNewsJordansDataHandler: PageDataHandler {
             }
 
             // recreate an image tag from the inner html
-            guard let imageDom = try? SwiftSoup.parseBodyFragment(innerImage) else {
+            guard let imageDom = try? parseBodyFragment(innerImage) else {
                 return nil
             }
 

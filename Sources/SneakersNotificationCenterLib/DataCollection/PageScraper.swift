@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftSoup
-import SwiftToolbox
+import class SwiftToolbox.InteractionHandler
 
 public class PageScraper {
 
