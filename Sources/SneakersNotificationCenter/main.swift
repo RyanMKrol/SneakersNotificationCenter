@@ -17,10 +17,10 @@ import enum SwiftToolbox.CommonErrors
 
 func run() {
 
-    let emailConfigFile = "/Users/ryankrol/Desktop/ToolboxProjects/SneakersNotificationCenter/Sources/SneakersNotificationCenterLib/emailConfig.json"
+    let emailConfigFile = "./../../SneakersNotificationCenterLib/EmailConfig.json"
     let savedLinksFile = "\(#file.components(separatedBy: "Sources/")[0])Data/saved.txt"
 
-    let emailConfig = try? ConfigHandler<EmailConfig>(configFile: emailConfigFile).load()
+    let emailConfig = try? ConfigHandler<EmailConfig>(configFile: emailConfigFile, relativeFrom: #file).load()
 
     guard let concreteEmailConfig = emailConfig else {
         print(CommonErrors.CouldNotLoadEmailConfig)
